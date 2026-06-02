@@ -1,5 +1,4 @@
 # Project: StayEasy - Online Hotel & Homestay Booking System
-
 **StayEasy** is a state-of-the-art online platform for searching and booking hotel rooms and homestays. Developed with high-end aesthetic designs, custom glassmorphism interfaces, smooth live interactive filters, and full loading spinners for responsive UX/UI.
 
 ---
@@ -7,21 +6,16 @@
 > **DEVELOPMENT & COPYRIGHT INFO**:
 > "Project: StayEasy - Developed by SlimexDev / Rimuru Scripter"
 > This banner is placed in all top file comments and headers.
-
 ---
-
 ## 🚀 Technologies & Constraints
-
 This project complies strictly with the following technical boundaries:
 - **Core Core**: Vanilla HTML5, Vanilla CSS3, Vanilla ES6 JavaScript (using Modules).
 - **Styling**: Bootstrap 5.3.3 via CDN + custom HSL dark/light variable systems.
 - **Library Bans**: NO React, Vue, Angular, Axios, TypeScript, TailwindCSS, or SweetAlert2.
 - **AJAX**: Pure `Fetch API` for backend database bindings.
-
 ---
 
 ## 📂 Folder Directory Layout
-
 ```text
 StayEasy/
 ├── index.html         # Main Client Search and Booking Page
@@ -36,12 +30,8 @@ StayEasy/
 └── README.md          # Project Documentation & Run Guide
 ```
 
----
-
 ## 💾 Database Schemas on MockAPI
-
 **Base Path**: `https://69f9a6e3c509a40d3aa2f039.mockapi.io/api/v1`
-
 ### 1. Rooms Endpoint (`/rooms`)
 - `id`: string (automated)
 - `roomName`: string
@@ -68,13 +58,9 @@ StayEasy/
   - `totalPrice`: number
   - `status`: string ("Chờ xác nhận" / "Đã xác nhận" / "Từ chối")
 
----
-
 ## 🛠️ Step-by-Step Run Instructions
-
 1. **Clone or Open Folder**:
    Put all directories and files inside a local folder (e.g., `StayEasy/`).
-
 2. **Serve the Application**:
    Since the codebase utilizes ES6 modules (`type="module"`), you **MUST** run the project on a local web server to avoid CORS issues (`file://` protocol restrictions).
    - *Option A*: Open VS Code and launch the **Live Server** extension.
@@ -86,14 +72,10 @@ StayEasy/
      ```bash
      python -m http-server 8000
      ```
-
 3. **Browse**:
    Open your browser at `http://localhost:8080` (or the port specified by your local server tool).
 
----
-
 ## 🧪 Admin Credentials for Testing
-
 To quickly test the administration dashboard:
 1. Open the Homepage (`index.html`).
 2. Click **Đăng ký** (Register) to sign up a new account, or use existing accounts.

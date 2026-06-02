@@ -1,5 +1,3 @@
-// Project: StayEasy - Developed by SlimexDev / Rimuru Scripter
-
 import { API } from './api.js';
 import { Utils } from './utils.js';
 

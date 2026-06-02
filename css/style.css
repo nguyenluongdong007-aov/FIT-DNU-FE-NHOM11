@@ -1,17 +1,11 @@
-/* Project: StayEasy - Developed by SlimexDev / Rimuru Scripter */
-
-/* Import Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
-
 :root {
     --font-primary: 'Outfit', sans-serif;
     --font-secondary: 'Montserrat', sans-serif;
-    
-    /* Core Light Theme Palette - Sleek and Rich */
-    --se-primary: #f59e0b; /* Amber gold */
+    --se-primary: #f59e0b;
     --se-primary-hover: #d97706;
-    --se-secondary: #0f172a; /* Deep slate */
-    --se-accent: #3b82f6; /* Modern Blue */
+    --se-secondary: #0f172a;
+    --se-accent: #3b82f6;
     --se-bg-grad: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     --se-card-bg: rgba(255, 255, 255, 0.85);
     --se-card-border: rgba(226, 232, 240, 0.8);
@@ -20,8 +14,6 @@
     --se-glass-blur: blur(16px);
     --se-glow: 0 10px 30px -10px rgba(245, 158, 11, 0.3);
 }
-
-/* Custom dark mode adjustments in combination with Bootstrap 5 */
 [data-bs-theme="dark"] {
     --se-secondary: #f8fafc;
     --se-bg-grad: linear-gradient(135deg, #0f172a 0%, #020617 100%);
@@ -46,7 +38,7 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     letter-spacing: -0.5px;
 }
 
-/* --- COPYRIGHT BAR IN HEADER --- */
+
 .copyright-pill {
     background: linear-gradient(90deg, rgba(245, 158, 11, 0.15) 0%, rgba(59, 130, 246, 0.15) 100%);
     border: 1px solid rgba(245, 158, 11, 0.3);
@@ -59,7 +51,6 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     text-transform: uppercase;
 }
 
-/* --- PREMIUM NAVBAR --- */
 .navbar-custom {
     background: rgba(255, 255, 255, 0.05) !important;
     backdrop-filter: var(--se-glass-blur);
@@ -76,7 +67,6 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     font-size: 1.6rem;
 }
 
-/* --- HERO SECTION --- */
 .hero-section {
     position: relative;
     padding: 6rem 0 4rem 0;
@@ -103,7 +93,6 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     color: #ffffff;
 }
 
-/* --- SEARCH & FILTER BAR --- */
 .search-filter-card {
     background: var(--se-card-bg);
     backdrop-filter: var(--se-glass-blur);
@@ -132,7 +121,6 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     margin-bottom: 0.5rem;
 }
 
-/* --- PREMIUM CARD DESIGNS --- */
 .room-card {
     background: var(--se-card-bg);
     backdrop-filter: var(--se-glass-blur);
@@ -232,7 +220,7 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     color: var(--se-text-muted);
 }
 
-/* --- BUTTON CUSTOM STYLES --- */
+
 .btn-primary-custom {
     background: var(--se-primary);
     border: none;
@@ -263,7 +251,6 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     transform: none;
 }
 
-/* --- GLASS LAYOUT MODAL --- */
 .modal-content-custom {
     background: var(--se-card-bg);
     backdrop-filter: var(--se-glass-blur);
@@ -299,12 +286,11 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     color: var(--se-text-main);
 }
 
-/* --- DYNAMIC LOADING OVERLAY --- */
 #globalSpinner {
     background: rgba(15, 23, 42, 0.6);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    z-index: 10000; /* Ensure spinner sits above everything, including bootstrap modals */
+    z-index: 10000;
     position: fixed;
     top: 0;
     left: 0;
@@ -350,7 +336,6 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     }
 }
 
-/* --- ADMIN VIEWS CUSTOM TABS --- */
 .nav-pills-custom {
     background: rgba(255, 255, 255, 0.05);
     padding: 0.4rem;
@@ -373,7 +358,6 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
 }
 
-/* Custom modern table styling */
 .admin-table {
     border-collapse: separate;
     border-spacing: 0 8px;
@@ -422,7 +406,6 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     border-bottom-right-radius: 0.75rem;
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -437,7 +420,6 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
     background: rgba(245, 158, 11, 0.4);
 }
 
-/* Pulsing glow animation for QR code frame */
 @keyframes pulse-glow {
     0% {
         box-shadow: 0 0 5px rgba(59, 130, 246, 0.2);

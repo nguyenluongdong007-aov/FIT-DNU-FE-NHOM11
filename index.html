@@ -1,23 +1,14 @@
-<!-- Project: StayEasy - Developed by SlimexDev / Rimuru Scripter -->
 <!DOCTYPE html>
 <html lang="vi" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StayEasy - Hệ thống đặt phòng khách sạn & homestay trực tuyến</title>
-    
-    <!-- Bootstrap 5 CSS via CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
-    <!-- Bootstrap Icons via CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    
-    <!-- Custom Modern Premium Styling -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-    <!-- GLOBAL LOADING SPINNER OVERLAY -->
     <div id="globalSpinner" class="d-none align-items-center justify-content-center">
         <div class="text-center">
             <div class="spinner-glow mb-3">
@@ -26,33 +17,21 @@
             <h5 class="text-white font-secondary fw-semibold">Đang xử lý dữ liệu...</h5>
         </div>
     </div>
-
-    <!-- HEADER / NAVIGATION BAR -->
     <nav class="navbar navbar-expand-lg navbar-custom sticky-top py-3">
         <div class="container">
-            <!-- Premium Brand Logo on the Left -->
             <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
                 <i class="bi bi-house-heart-fill text-warning fs-3"></i>
                 <span class="navbar-brand-text">StayEasy</span>
             </a>
-            
-            <!-- Mobile Toggler -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
             <div class="collapse navbar-collapse" id="navbarContent">
-                <!-- Spacer to push items to the right -->
                 <div class="me-auto"></div>
-                
-                <!-- Right aligned action items -->
                 <div class="d-flex align-items-center flex-wrap gap-3">
-                    <!-- DARK MODE TOGGLER -->
                     <button id="darkModeToggle" class="btn btn-outline-warning btn-sm rounded-pill px-3 py-2 d-flex align-items-center gap-2 fw-semibold text-warning">
                         <i class="bi bi-sun-fill text-warning"></i> Giao diện Sáng
                     </button>
-                    
-                    <!-- USER SESSION CONTROLLER -->
                     <div id="authButtons" class="d-flex gap-2">
                         <button class="btn btn-outline-primary border-2 rounded-pill btn-sm px-3 py-2 fw-semibold" data-bs-toggle="modal" data-bs-target="#loginModal">
                             <i class="bi bi-box-arrow-in-right me-1"></i> Đăng nhập
@@ -61,7 +40,6 @@
                             <i class="bi bi-person-plus-fill me-1"></i> Đăng ký
                         </button>
                     </div>
-                    
                     <div id="userWelcome" class="d-none align-items-center gap-3">
                         <span class="fw-bold text-white d-flex align-items-center gap-1 fs-6">
                             <i class="bi bi-person-circle text-warning fs-5"></i>
@@ -78,8 +56,6 @@
             </div>
         </div>
     </nav>
-
-    <!-- HERO WELCOME SECTION -->
     <header class="hero-section" style="background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1600&auto=format&fit=crop');">
         <div class="hero-overlay"></div>
         <div class="container hero-content text-center py-5">
@@ -93,8 +69,6 @@
             </div>
         </div>
     </header>
-
-    <!-- SEARCH & LIVE FILTER BAR -->
     <main class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10">
@@ -103,7 +77,6 @@
                         <i class="bi bi-sliders text-warning"></i> Bộ lọc tìm kiếm thời gian thực
                     </h5>
                     <div class="row g-3">
-                        <!-- Filter Price -->
                         <div class="col-md-4">
                             <label for="filterPrice" class="filter-label d-flex justify-content-between">
                                 <span>Giá tối đa/đêm</span>
@@ -115,8 +88,6 @@
                                 <span>5M ₫</span>
                             </div>
                         </div>
-                        
-                        <!-- Filter Guests -->
                         <div class="col-md-4">
                             <label for="filterGuests" class="filter-label">Số khách tối đa</label>
                             <div class="input-group">
@@ -124,8 +95,6 @@
                                 <input type="number" id="filterGuests" class="form-control form-control-custom border-start-0 ps-1" min="1" placeholder="Số khách...">
                             </div>
                         </div>
-                        
-                        <!-- Filter Type -->
                         <div class="col-md-4">
                             <label for="filterType" class="filter-label">Loại phòng nghỉ</label>
                             <div class="input-group">
@@ -142,8 +111,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- ROOMS GRID DISPLAY -->
         <section class="my-5">
             <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                 <div>
@@ -154,12 +121,8 @@
                     <i class="bi bi-arrow-counterclockwise me-1"></i> Xóa bộ lọc
                 </button>
             </div>
-            
             <div id="roomsGrid" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-                <!-- Dynamic Room Cards will be injected here -->
             </div>
-            
-            <!-- Empty state illustration -->
             <div id="emptyRoomsState" class="text-center py-5 d-none">
                 <i class="bi bi-search-heart text-muted display-1"></i>
                 <h4 class="mt-3 fw-bold text-muted">Không tìm thấy phòng phù hợp!</h4>
@@ -167,16 +130,12 @@
             </div>
         </section>
     </main>
-
-    <!-- FOOTER -->
     <footer class="py-4 border-top mt-5 bg-body-tertiary">
         <div class="container text-center">
             <p class="mb-1 fw-bold text-warning font-secondary">StayEasy Online Accommodation Hub</p>
             <p class="text-muted mb-0 fs-7">© 2026. Phát triển dưới các tiêu chuẩn FRONT-END chuyên nghiệp.</p>
         </div>
     </footer>
-
-    <!-- MODAL 1: REGISTER -->
     <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content modal-content-custom">
@@ -200,7 +159,6 @@
                             <label for="regPassword" class="form-label fw-semibold">Mật Khẩu</label>
                             <input type="password" class="form-control form-control-custom" id="regPassword" required placeholder="Nhập mật khẩu bảo mật">
                         </div>
-
                     </div>
                     <div class="modal-footer modal-footer-custom">
                         <button type="button" class="btn btn-outline-secondary rounded-pill px-4" data-bs-dismiss="modal">Hủy bỏ</button>
@@ -210,8 +168,6 @@
             </div>
         </div>
     </div>
-
-    <!-- MODAL 2: LOGIN -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content modal-content-custom">
@@ -240,8 +196,6 @@
             </div>
         </div>
     </div>
-
-    <!-- MODAL 3: ROOM DETAIL & RESERVATION -->
     <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content modal-content-custom">
@@ -251,7 +205,6 @@
                 </div>
                 <div class="modal-body p-4">
                     <div class="row g-4">
-                        <!-- Left Side: Room visual details -->
                         <div class="col-lg-6">
                             <img id="bookRoomImg" src="" alt="Hình ảnh phòng" class="img-fluid rounded-4 shadow mb-3 w-100" style="height: 250px; object-fit: cover;">
                             <h4 id="bookRoomName" class="fw-bold mb-1">Tên phòng nghỉ</h4>
@@ -265,8 +218,6 @@
                                 <h4 class="text-warning fw-bold mb-0" id="bookRoomPrice">0 ₫</h4>
                             </div>
                         </div>
-                        
-                        <!-- Right Side: Booking Calculation Form -->
                         <div class="col-lg-6">
                             <div class="p-3 border rounded-4 bg-body-tertiary height-100">
                                 <h5 class="fw-bold text-accent mb-3"><i class="bi bi-calendar-check me-2 text-warning"></i>Form Đặt Phòng</h5>
@@ -282,8 +233,6 @@
                                         <label for="bookCheckOut" class="form-label fw-semibold">Ngày trả phòng</label>
                                         <input type="date" class="form-control form-control-custom" id="bookCheckOut" required>
                                     </div>
-                                    
-                                    <!-- Payment Method Select -->
                                     <div class="mb-3">
                                         <label for="bookPaymentMethod" class="form-label fw-semibold">Phương thức thanh toán</label>
                                         <select class="form-select form-select-custom" id="bookPaymentMethod" required>
@@ -291,8 +240,6 @@
                                             <option value="Chuyển khoản">Chuyển khoản VietQR (Napas 24/7)</option>
                                         </select>
                                     </div>
-
-                                    <!-- Dynamic price calculations -->
                                     <div class="p-3 bg-warning-subtle text-dark border border-warning rounded-3 mb-3 d-none" id="calcSummary">
                                         <div class="d-flex justify-content-between fs-7 mb-1">
                                             <span>Số đêm lưu trú:</span>
@@ -308,18 +255,13 @@
                                             <h4 class="fw-bold text-danger mb-0" id="calcTotalPrice">0 ₫</h4>
                                         </div>
                                     </div>
-
-                                    <!-- Bank Transfer details drawer (glowing border / premium VietQR card display) -->
                                     <div class="p-3 border border-info rounded-3 bg-info-subtle text-dark mb-3 d-none" id="qrPaymentContainer">
                                         <h6 class="fw-bold text-info-emphasis mb-2 d-flex align-items-center gap-1">
                                             <i class="bi bi-qr-code-scan text-info"></i> Quét mã VietQR chuyển khoản nhanh
                                         </h6>
-                                        
-                                        <!-- VietQR dynamically generated image -->
                                         <div class="text-center bg-white p-2 rounded-3 shadow-sm border border-info-subtle mb-3 position-relative overflow-hidden" style="animation: pulse-glow 2s infinite ease-in-out;">
                                             <img id="vietQrImg" src="" alt="Mã VietQR" class="img-fluid rounded-2" style="max-height: 380px; object-fit: contain;">
-                                        </div>
-                                        
+                                        </div>                                       
                                         <div class="fs-8 text-secondary">
                                             <div class="mb-1 d-flex justify-content-between">
                                                 <span>Ngân hàng:</span>
@@ -354,11 +296,7 @@
             </div>
         </div>
     </div>
-
-    <!-- Bootstrap 5 JS Bundle via CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="crossorigin"></script>
-    
-    <!-- Main Client JavaScript Logic -->
     <script type="module" src="js/main.js"></script>
 </body>
 </html>
