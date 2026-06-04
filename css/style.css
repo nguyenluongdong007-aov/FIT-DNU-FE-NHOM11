@@ -61,6 +61,7 @@ h1, h2, h3, h4, h5, h6, .navbar-brand {
 
 .navbar-brand-text {
     background: linear-gradient(to right, #f59e0b, #3b82f6);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     font-weight: 800;
