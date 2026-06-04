@@ -1,13 +1,11 @@
 import { API } from './api.js';
 import { Utils } from './utils.js';
-
 let roomsList = [];
 let currentUser = null;
 let activeRoom = null;
 let bookingModalInstance = null;
 let loginModalInstance = null;
 let registerModalInstance = null;
-
 document.addEventListener('DOMContentLoaded', async () => {
     Utils.initDarkMode();
     const darkToggle = document.getElementById('darkModeToggle');
@@ -29,7 +27,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     bindAuthEvents();
     bindBookingEvents();
 });
-
 function checkSession() {
     currentUser = Utils.getCurrentUser();   
     const authButtons = document.getElementById('authButtons');
@@ -66,7 +63,6 @@ function checkSession() {
         });
     }
 }
-
 async function fetchAndRenderRooms() {
     Utils.showSpinner();
     try {
@@ -79,7 +75,6 @@ async function fetchAndRenderRooms() {
         Utils.hideSpinner();
     }
 }
-
 function renderRooms(rooms) {
     const grid = document.getElementById('roomsGrid');
     const counter = document.getElementById('roomsCounter');
@@ -93,7 +88,6 @@ function renderRooms(rooms) {
     } else {
         if (emptyState) emptyState.classList.add('d-none');
     }
-    
     rooms.forEach(room => {
         const imageSrc = room.image || 'https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=600&auto=format&fit=crop';        
         const isMaintenance = room.status === 'Đang sửa';
@@ -125,7 +119,6 @@ function renderRooms(rooms) {
                 </div>
             </div>
         `;
-        
         grid.insertAdjacentHTML('beforeend', cardHtml);
     });
     document.querySelectorAll('.book-btn').forEach(btn => {
@@ -135,7 +128,6 @@ function renderRooms(rooms) {
         });
     });
 }
-
 function bindFilterEvents() {
     const filterPrice = document.getElementById('filterPrice');
     const priceVal = document.getElementById('priceVal');
@@ -180,7 +172,6 @@ function bindFilterEvents() {
         });
     }
 }
-
 function bindAuthEvents() {
     const registerForm = document.getElementById('registerForm');
     const loginForm = document.getElementById('loginForm');
@@ -250,7 +241,6 @@ function bindAuthEvents() {
         });
     }
 }
-
 function openBookingProcess(roomId) {
     currentUser = Utils.getCurrentUser();
     if (!currentUser) {
@@ -280,33 +270,27 @@ function openBookingProcess(roomId) {
     const submitBtn = document.getElementById('submitBookingBtn');
     const summaryDiv = document.getElementById('calcSummary');
     const paymentMethodInput = document.getElementById('bookPaymentMethod');
-    const qrContainer = document.getElementById('qrPaymentContainer');
-    
+    const qrContainer = document.getElementById('qrPaymentContainer'); 
     if (checkInInput) checkInInput.value = '';
     if (checkOutInput) checkOutInput.value = '';
     if (submitBtn) submitBtn.disabled = true;
     if (summaryDiv) summaryDiv.classList.add('d-none');
     if (paymentMethodInput) paymentMethodInput.value = 'Tiền mặt';
     if (qrContainer) qrContainer.classList.add('d-none');
-    
     const bookingCode = 'SE' + Date.now().toString().slice(-6);
     const qrAddInfoSpan = document.getElementById('qrAddInfo');
     if (qrAddInfoSpan) qrAddInfoSpan.textContent = bookingCode;
-
     const today = new Date().toISOString().split('T')[0];
     if (checkInInput) checkInInput.min = today;
-    
     if (bookingModalInstance) {
         bookingModalInstance.show();
     }
 }
-
 function bindBookingEvents() {
     const checkInInput = document.getElementById('bookCheckIn');
     const checkOutInput = document.getElementById('bookCheckOut');
     const paymentMethodInput = document.getElementById('bookPaymentMethod');
     const submitForm = document.getElementById('bookingSubmitForm');
-    
     function validateAndCalculatePrice() {
         const checkInVal = checkInInput.value;
         const checkOutVal = checkOutInput.value;
@@ -314,16 +298,13 @@ function bindBookingEvents() {
         const submitBtn = document.getElementById('submitBookingBtn');
         const summaryDiv = document.getElementById('calcSummary');
         const qrContainer = document.getElementById('qrPaymentContainer');
-        
         if (!checkInVal || !checkOutVal) {
             if (submitBtn) submitBtn.disabled = true;
             if (summaryDiv) summaryDiv.classList.add('d-none');
             if (qrContainer) qrContainer.classList.add('d-none');
             return;
         }
-        
         const nights = Utils.calculateNights(checkInVal, checkOutVal);
-        
         if (nights <= 0) {
             Utils.showToast('Ngày trả phòng phải sau ngày nhận phòng ít nhất 1 ngày!', 'warning');
             if (submitBtn) submitBtn.disabled = true;
@@ -332,13 +313,10 @@ function bindBookingEvents() {
             checkOutInput.value = '';
             return;
         }
-        
         const totalPrice = nights * activeRoom.price;
-        
         document.getElementById('calcNights').textContent = `${nights} đêm`;
         document.getElementById('calcUnitPrice').textContent = `${Utils.formatCurrency(activeRoom.price)}/đêm`;
         document.getElementById('calcTotalPrice').textContent = Utils.formatCurrency(totalPrice);
-        
         if (summaryDiv) summaryDiv.classList.remove('d-none');
         if (submitBtn) submitBtn.disabled = false;
         if (paymentMethodVal === 'Chuyển khoản') {
@@ -392,7 +370,6 @@ function bindBookingEvents() {
                 paymentStatus: paymentMethodVal === 'Chuyển khoản' ? 'Chờ xác nhận chuyển khoản' : 'Thanh toán khi nhận phòng',
                 status: 'Chờ xác nhận'
             };
-
             if (!currentUser.bookings) {
                 currentUser.bookings = [];
             }

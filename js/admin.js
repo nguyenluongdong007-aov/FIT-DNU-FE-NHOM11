@@ -93,29 +93,23 @@ function renderRoomsTable() {
     const tableBody = document.getElementById('roomsTableBody');
     const totalCountLabel = document.getElementById('totalRoomsCount');
     const emptyState = document.getElementById('emptyRoomsTable');
-    
     if (!tableBody) return;
     tableBody.innerHTML = '';
-    
     if (totalCountLabel) {
         totalCountLabel.textContent = roomsList.length;
     }
-    
     if (roomsList.length === 0) {
         if (emptyState) emptyState.classList.remove('d-none');
         return;
     } else {
         if (emptyState) emptyState.classList.add('d-none');
     }
-    
     roomsList.forEach(room => {
         const imageSrc = room.image || 'https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=200&auto=format&fit=crop';
         const isMaintenance = room.status === 'Đang sửa';
         const statusBadge = isMaintenance 
             ? '<span class="badge bg-danger"><i class="bi bi-tools me-1"></i>Đang bảo trì</span>'
-            : '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Trống</span>';   
-        
-        // ĐÃ CHUẨN HÓA HTML: Sửa lỗi vỡ ảnh và dính chữ làm mất class Bootstrap
+            : '<span class="badge bg-success"><i class="bi bi-check-circle me-1"></i>Trống</span>';  
         const rowHtml = `
             <tr id="room_row_${room.id}">
                 <td>
@@ -144,16 +138,12 @@ function renderRoomsTable() {
         `;
         tableBody.insertAdjacentHTML('beforeend', rowHtml);
     });
-    
-    // Gắn sự kiện click nút Sửa
     document.querySelectorAll('.edit-room-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const id = e.currentTarget.getAttribute('data-id');
             openRoomModal(id);
         });
     });
-    
-    // Gắn sự kiện click nút Xóa
     document.querySelectorAll('.delete-room-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
             const id = e.currentTarget.getAttribute('data-id');
@@ -207,36 +197,27 @@ function bindRoomFormEvents() {
         const image = document.getElementById('roomImage').value.trim();
         const status = document.getElementById('roomStatus').value;
         const description = document.getElementById('roomDescription').value.trim();
-        
-        // ĐÃ SỬA: Đảm bảo các key (thuộc tính) này trùng khớp 100% với các cột trên MockAPI của bạn
         const roomData = {
             roomName: roomName,
-            type: type,             // Nếu MockAPI lưu là roomType, hãy đổi thành roomType: type
-            price: price,           // Nếu MockAPI lưu là roomPrice, hãy đổi thành roomPrice: price
-            maxGuests: maxGuests,   // Nếu MockAPI lưu là roomMaxGuests, hãy đổi thành roomMaxGuests: maxGuests
-            image: image,           // Nếu MockAPI lưu là roomImage, hãy đổi thành roomImage: image
-            status: status,         // Nếu MockAPI lưu là roomStatus, hãy đổi thành roomStatus: status
-            description: description// Nếu MockAPI lưu là roomDescription, hãy đổi thành roomDescription: description
+            type: type,
+            price: price,           
+            maxGuests: maxGuests,  
+            image: image,         
+            status: status,         
+            description: description,
         };
-        
         Utils.showSpinner();
         try {
             if (!id) {
-                // Trường hợp thêm mới (POST)
                 await API.addRoom(roomData);
                 Utils.showToast('Thêm phòng nghỉ thành công!', 'success');
             } else {
-                // Trường hợp cập nhật đồng bộ lên MockAPI (PUT)
                 await API.updateRoom(id, roomData);
                 Utils.showToast('Cập nhật và đồng bộ MockAPI thành công!', 'success');
             }
-            
-            // Ẩn modal sau khi lưu thành công
             if (roomModalInstance) {
                 roomModalInstance.hide();
-            }         
-            
-            // Gọi lại hàm này để tải lại dữ liệu mới nhất từ MockAPI về giao diện
+            }   
             await reloadAllData();               
         } catch (err) {
             Utils.showToast(err.message, 'danger');

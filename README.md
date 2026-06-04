@@ -57,7 +57,7 @@ StayEasy/
   - `totalNights`: number
   - `totalPrice`: number
   - `status`: string ("Chờ xác nhận" / "Đã xác nhận" / "Từ chối")
-
+  
 ## 🛠️ Step-by-Step Run Instructions
 1. **Clone or Open Folder**:
    Put all directories and files inside a local folder (e.g., `StayEasy/`).
@@ -74,7 +74,6 @@ StayEasy/
      ```
 3. **Browse**:
    Open your browser at `http://localhost:8080` (or the port specified by your local server tool).
-
 ## 🧪 Admin Credentials for Testing
 To quickly test the administration dashboard:
 1. Open the Homepage (`index.html`).
