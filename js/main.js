@@ -392,3 +392,13 @@ function bindBookingEvents() {
         });
     }
 }
+document.getElementById('btn-search-filter')?.addEventListener('click', function (e) {
+    e.preventDefault();
+    const roomsSection = document.getElementById('rooms-section');
+    if (roomsSection) {
+        roomsSection.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start'      
+        });
+    }
+});

@@ -28,10 +28,18 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-lg-4 gap-3">
-                    <li class="nav-item"><a class="nav-link fw-semibold active" href="index.html">Trang Chủ</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold" href="#about-section">Giới Thiệu</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold" href="#rooms-section">Danh Sách Phòng</a></li>
-                    <li class="nav-item"><a class="nav-link fw-semibold" href="#features-section">Dịch Vụ</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold active" href="#about-section">Giới Thiệu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#rooms-section">Danh Sách Phòng</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#features-section">Dịch Vụ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-semibold" href="#contact-section">Liên Hệ</a>
+                    </li>
                 </ul>
                 <div class="d-flex align-items-center flex-wrap gap-3">
                     <div id="authButtons" class="d-flex gap-2">
@@ -148,14 +156,14 @@
         </section>
         <div class="row justify-content-center">
             <div class="col-12 col-lg-10">
-                <div class="search-filter-card p-4 rounded-4">
-                    <h5 class="fw-bold mb-3 text-secondary d-flex align-items-center gap-2">
+                <div class="card border-0 shadow-sm rounded-4 p-4 mb-5 animate-fade-in">
+                    <h5 class="fw-bold mb-4 text-dark d-flex align-items-center gap-2">
                         <i class="bi bi-sliders text-warning"></i> Bộ lọc tìm kiếm thông minh
                     </h5>
-                    <div class="row g-3">
-                        <div class="col-md-4">
+                    <div class="row g-3 align-items-end">
+                        <div class="col-lg-3 col-md-6">
                             <label for="filterPrice" class="filter-label d-flex justify-content-between mb-1">
-                                <span class="fw-semibold fs-7">Giá tối đa/đêm</span>
+                                <span class="fw-semibold fs-7 text-muted text-uppercase small tracking-wider">Giá tối đa/đêm</span>
                                 <span id="priceVal" class="text-warning fw-bold">Tất cả</span>
                             </label>
                             <input type="range" class="form-range" id="filterPrice" min="0" max="5000000" step="100000" value="5000000">
@@ -164,15 +172,15 @@
                                 <span>5M ₫</span>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="filterGuests" class="filter-label mb-1 fw-semibold fs-7">Số khách tối đa</label>
+                        <div class="col-lg-3 col-md-6">
+                            <label for="filterGuests" class="filter-label mb-1 fw-semibold fs-7 text-muted text-uppercase small tracking-wider">Số khách tối đa</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="bi bi-people-fill"></i></span>
                                 <input type="number" id="filterGuests" class="form-control form-control-custom border-start-0 ps-1" min="1" placeholder="Số khách...">
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <label for="filterType" class="filter-label mb-1 fw-semibold fs-7">Loại phòng nghỉ</label>
+                        <div class="col-lg-3 col-md-6">
+                            <label for="filterType" class="filter-label mb-1 fw-semibold fs-7 text-muted text-uppercase small tracking-wider">Loại phòng nghỉ</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-transparent border-end-0 text-muted"><i class="bi bi-building"></i></span>
                                 <select id="filterType" class="form-select form-select-custom border-start-0 ps-1">
@@ -183,6 +191,11 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="col-lg-3 col-md-6">
+                            <button id="btn-search-filter" class="btn btn-warning rounded-pill w-100 py-2.5 fw-bold text-dark shadow-sm">
+                                <i class="bi bi-search me-2"></i>Tìm Kiếm Ngay
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -190,7 +203,7 @@
         <section id="rooms-section" class="my-5 pt-4">
             <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
                 <div>
-                    <h3 class="fw-bold mb-0 display-7">Danh sách phòng nghỉ gợi ý</h3>
+                    <h3 class="fw-bold mb-0 display-7">Danh sách phòng nghỉ</h3>
                     <p class="text-muted mb-0 fs-7">Hệ thống tìm thấy <span id="roomsCounter" class="text-warning fw-bold">0</span> kết quả phù hợp</p>
                 </div>
                 <button id="resetFiltersBtn" class="btn btn-outline-secondary rounded-pill btn-sm py-2 px-3 fw-semibold">
@@ -204,40 +217,97 @@
                 <p class="text-muted">Bạn vui lòng điều chỉnh lại tiêu chí lọc hoặc thanh giá trị.</p>
             </div>
         </section>
-        <section id="features-section" class="py-5 my-4 border-top">
-            <div class="text-center mb-5">
-                <h2 class="fw-extrabold mb-1">Tại Sao Bạn Nên Chọn StayEasy?</h2>
-                <p class="text-muted max-w-xl mx-auto fs-7">Chúng tôi định hình lại quy trình thuê và quản lý phòng nghỉ theo cách hiện đại nhất.</p>
+        <section id="features-section" class="py-5 my-5 border-top">
+            <div class="text-center mb-5 mt-3">
+                <span class="badge bg-warning-subtle text-warning px-3 py-2 rounded-pill fw-bold text-uppercase tracking-wider fs-8 mb-2">
+                    <i class="bi bi-shield-shaded me-1"></i> Tiêu chuẩn vận hành
+                </span>
+                <h2 class="fw-extrabold display-6 mb-2">Tại Sao Bạn Nên Chọn StayEasy?</h2>
+                <p class="text-muted max-w-xl mx-auto fs-7">Chúng tôi định hình lại quy trình thuê và quản lý phòng nghỉ theo cách công nghệ hiện đại nhất.</p>
             </div>
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="p-4 border rounded-4 text-center h-100 shadow-sm bg-body-tertiary">
-                        <div class="icon-box bg-warning-subtle text-warning rounded-circle d-inline-flex p-3 mb-3 fs-3"><i class="bi bi-shield-check"></i></div>
-                        <h5 class="fw-bold mb-2">Bảo mật tuyệt đối</h5>
-                        <p class="text-muted fs-7 mb-0">Hệ thống xử lý mã đơn hàng tự động, liên kết đồng bộ tài khoản dữ liệu MockAPI mã hóa.</p>
+                    <div class="p-4 border border-light-subtle rounded-4 text-center h-100 shadow-sm service-premium-card bg-body">
+                        <div class="icon-box-wrapper bg-warning-subtle text-warning rounded-circle d-inline-flex align-items-center justify-content-center p-3 mb-4 fs-3">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h5 class="fw-bold mb-3 text-dark-emphasis">Bảo mật tuyệt đối</h5>
+                        <p class="text-muted fs-7 lh-lg mb-0">Hệ thống xử lý mã đơn hàng tự động, liên kết đồng bộ tài khoản dữ liệu MockAPI được mã hóa lớp bảo vệ nâng cao.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-4 border rounded-4 text-center h-100 shadow-sm bg-body-tertiary">
-                        <div class="icon-box bg-info-subtle text-info rounded-circle d-inline-flex p-3 mb-3 fs-3"><i class="bi bi-qr-code-scan"></i></div>
-                        <h5 class="fw-bold mb-2">Thanh toán VietQR động</h5>
-                        <p class="text-muted fs-7 mb-0">Hệ thống tự động kết xuất mã Napas 24/7 khớp chuẩn xác số tiền và nội dung chuyển khoản.</p>
+                    <div class="p-4 border border-light-subtle rounded-4 text-center h-100 shadow-sm service-premium-card bg-body">
+                        <div class="icon-box-wrapper bg-info-subtle text-info rounded-circle d-inline-flex align-items-center justify-content-center p-3 mb-4 fs-3">
+                            <i class="bi bi-qr-code-scan"></i>
+                        </div>
+                        <h5 class="fw-bold mb-3 text-dark-emphasis">Thanh toán VietQR động</h5>
+                        <p class="text-muted fs-7 lh-lg mb-0">Hệ thống tự động kết xuất mã Napas 24/7 khớp chuẩn xác số tiền và nội dung chuyển khoản theo thời gian thực.</p>
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="p-4 border rounded-4 text-center h-100 shadow-sm bg-body-tertiary">
-                        <div class="icon-box bg-success-subtle text-success rounded-circle d-inline-flex p-3 mb-3 fs-3"><i class="bi bi-headset"></i></div>
-                        <h5 class="fw-bold mb-2">Hỗ trợ 24/7</h5>
-                        <p class="text-muted fs-7 mb-0">Đội ngũ kỹ thuật viên sẵn sàng đồng bộ và kiểm tra trạng thái phê duyệt phòng từ Admin.</p>
+                    <div class="p-4 border border-light-subtle rounded-4 text-center h-100 shadow-sm service-premium-card bg-body">
+                        <div class="icon-box-wrapper bg-success-subtle text-success rounded-circle d-inline-flex align-items-center justify-content-center p-3 mb-4 fs-3">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <h5 class="fw-bold mb-3 text-dark-emphasis">Hỗ trợ vận hành 24/7</h5>
+                        <p class="text-muted fs-7 lh-lg mb-0">Đội ngũ kỹ thuật viên chuyên nghiệp luôn sẵn sàng hỗ trợ đồng bộ, phê duyệt trạng thái phòng từ bảng Admin.</p>
                     </div>
                 </div>
             </div>
         </section>
     </main>
-    <footer class="py-4 border-top bg-body-tertiary">
-        <div class="container text-center">
-            <p class="mb-1 fw-bold text-warning font-secondary">StayEasy Online Accommodation Hub</p>
-            <p class="text-muted mb-0 fs-7">© 2026 StayEasy. Bản quyền mã nguồn được bảo lưu toàn diện.</p>
+    <footer id="contact-section" class="pt-5 pb-4 border-top bg-body-tertiary">
+        <div class="container">
+            <div class="row g-4 mb-4 text-start">
+                <div class="col-lg-5 col-md-6">
+                    <h5 class="fw-bold text-warning mb-3 d-flex align-items-center gap-2 font-secondary">
+                        <i class="bi bi-house-heart-fill"></i> StayEasy Hub
+                    </h5>
+                    <p class="text-muted fs-7 lh-lg max-w-sm">
+                        Hệ thống quản lý trực tuyến và đặt phòng homestay phân khúc sinh viên chuyên nghiệp hàng đầu tại Việt Nam. Tối ưu quy trình giữ chỗ an toàn, nhanh chóng.
+                    </p>
+                    <div class="d-flex gap-2.5 mt-3">
+                        <a href="#" class="btn btn-sm btn-outline-secondary rounded-circle footer-social-icon"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="btn btn-sm btn-outline-secondary rounded-circle footer-social-icon"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="btn btn-sm btn-outline-secondary rounded-circle footer-social-icon"><i class="bi bi-github"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <h6 class="fw-bold text-dark-emphasis text-uppercase tracking-wider small mb-3">Thông Tin Liên Hệ</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2.5 text-muted fs-7">
+                        <li class="d-flex align-items-start gap-2">
+                            <i class="bi bi-geo-alt-fill text-warning mt-0.5"></i>
+                            <span>Hà Nội</span>
+                        </li>
+                        <li class="d-flex align-items-center gap-2">
+                            <i class="bi bi-telephone-fill text-warning"></i>
+                            <span class="fw-semibold text-dark-emphasis">+84 971 800 681</span>
+                        </li>
+                        <li class="d-flex align-items-center gap-2">
+                            <i class="bi bi-envelope-fill text-warning"></i>
+                            <span>support@stayeasy.com.vn</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="fw-bold text-dark-emphasis text-uppercase tracking-wider small mb-3">Tổng Đài Hỗ Trợ</h6>
+                    <ul class="list-unstyled d-flex flex-column gap-2.5 text-muted fs-7">
+                        <li class="d-flex align-items-center gap-2">
+                            <i class="bi bi-clock-fill text-warning"></i>
+                            <span>Hệ thống trực tuyến: 24/7/366</span>
+                        </li>
+                        <li class="d-flex align-items-center gap-2">
+                            <i class="bi bi-patch-check-fill text-success"></i>
+                            <span class="text-success fw-semibold">Phản hồi nhanh &lt; 15 phút</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="opacity-10 my-4">
+            <div class="text-center text-muted fs-8">
+                <p class="mb-1 fw-bold text-warning font-secondary text-uppercase tracking-widest">StayEasy Online Accommodation Hub - Version 2026</p>
+                <p class="mb-0">© 2026 StayEasy. Toàn bộ bản quyền giao diện và mã nguồn được bảo lưu.</p>
+            </div>
         </div>
     </footer>
     <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
