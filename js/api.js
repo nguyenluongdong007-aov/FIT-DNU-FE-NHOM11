@@ -52,11 +52,18 @@ export const API = {
         return await response.json();
     },
     async getRooms() {
-        const response = await fetch(`${BASE_URL}/rooms`);
-        if (!response.ok) {
-            throw new Error('Không thể tải danh sách phòng!');
+    const response = await fetch(`${BASE_URL}/rooms`, {
+        method: 'GET',
+        mode: 'cors',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
         }
-        return await response.json();
+    });
+    if (!response.ok) {
+        throw new Error('Không thể tải danh sách phòng!');
+    }
+    return await response.json();
     },
     async getRoomById(id) {
         const response = await fetch(`${BASE_URL}/rooms/${id}`);

@@ -46,10 +46,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch (e) {
         console.warn('Bootstrap room modal initialization delayed or handled implicitly.', e);
     }
+    ensureRoomIdInput();
     await reloadAllData();
     bindTabRefreshEvents();
     bindRoomFormEvents();
 });
+function ensureRoomIdInput() {
+    const roomForm = document.getElementById('roomForm');
+    if (roomForm && !document.getElementById('roomId')) {
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.id = 'roomId';
+        roomForm.appendChild(hiddenInput);
+        console.log('=> Hệ thống đã tự động bù thẻ ẩn <input id="roomId"> vào Form.');
+    }
+}
 async function reloadAllData() {
     Utils.showSpinner();
     try {
@@ -153,6 +164,7 @@ function renderRoomsTable() {
 }
 function openRoomModal(roomId = '') {
     console.log("==> Đã kích hoạt hàm openRoomModal với roomId =", roomId);
+    ensureRoomIdInput();
     const modalTitle = document.getElementById('roomModalTitle');
     const form = document.getElementById('roomForm');
     if (form) form.reset();
@@ -186,46 +198,46 @@ function bindRoomFormEvents() {
         });
     }
     if (roomForm) {
-    roomForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const id = document.getElementById('roomId').value;
-        const roomName = document.getElementById('roomName').value.trim();
-        const type = document.getElementById('roomType').value;
-        const price = parseFloat(document.getElementById('roomPrice').value);
-        const maxGuests = parseInt(document.getElementById('roomMaxGuests').value);
-        const image = document.getElementById('roomImage').value.trim();
-        const status = document.getElementById('roomStatus').value;
-        const description = document.getElementById('roomDescription').value.trim();
-        const roomData = {
-            roomName: roomName,
-            type: type,
-            price: price,           
-            maxGuests: maxGuests,  
-            image: image,         
-            status: status,         
-            description: description,
-        };
-        Utils.showSpinner();
-        try {
-            if (!id) {
-                await API.addRoom(roomData);
-                Utils.showToast('Thêm phòng nghỉ thành công!', 'success');
-            } else {
-                await API.updateRoom(id, roomData);
-                Utils.showToast('Cập nhật và đồng bộ MockAPI thành công!', 'success');
+        roomForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            ensureRoomIdInput();
+            const id = document.getElementById('roomId').value;
+            const roomName = document.getElementById('roomName').value.trim();
+            const type = document.getElementById('roomType').value;
+            const price = parseFloat(document.getElementById('roomPrice').value);
+            const maxGuests = parseInt(document.getElementById('roomMaxGuests').value);
+            const image = document.getElementById('roomImage').value.trim();
+            const status = document.getElementById('roomStatus').value;
+            const description = document.getElementById('roomDescription').value.trim();           
+            const roomData = {
+                roomName: roomName,
+                type: type,
+                price: price,          
+                maxGuests: maxGuests,  
+                image: image,         
+                status: status,         
+                description: description,
+            };
+            Utils.showSpinner();
+            try {
+                if (!id) {
+                    await API.addRoom(roomData);
+                    Utils.showToast('Thêm phòng nghỉ thành công!', 'success');
+                } else {
+                    await API.updateRoom(id, roomData);
+                    Utils.showToast('Cập nhật và đồng bộ thành công!', 'success');
+                }
+                if (roomModalInstance) {
+                    roomModalInstance.hide();
+                }   
+                await reloadAllData();               
+            } catch (err) {
+                Utils.showToast(err.message, 'danger');
+            } finally {
+                Utils.hideSpinner();
             }
-            if (roomModalInstance) {
-                roomModalInstance.hide();
-            }   
-            await reloadAllData();               
-        } catch (err) {
-            Utils.showToast(err.message, 'danger');
-        } finally {
-            Utils.hideSpinner();
-        }
-    });
-}
+        });
+    }
 }
 async function deleteRoomProcess(roomId) {
     const confirmDelete = confirm('Bạn có chắc chắn muốn xóa phòng nghỉ này khỏi hệ thống không? Dữ liệu đã xóa không thể khôi phục.');
@@ -264,7 +276,7 @@ function renderBookingsTable() {
         return;
     } else {
         if (emptyState) emptyState.classList.add('d-none');
-    }   
+    } 
     bookingsList.forEach(book => {
         let statusBadge = '';
         let actionButtons = '';    
@@ -298,7 +310,7 @@ function renderBookingsTable() {
         const payStatus = book.paymentStatus || (payMethod === 'Chuyển khoản' ? 'Chờ xác nhận chuyển khoản' : 'Thanh toán khi nhận phòng');
         const payMethodBadge = payMethod === 'Chuyển khoản'
             ? '<span class="badge bg-info-subtle text-info border border-info px-2 py-0.5 fs-8 ms-1">Chuyển khoản VietQR</span>'
-            : '<span class="badge bg-secondary-subtle text-secondary border border-secondary px-2 py-0.5 fs-8 ms-1">Tiền mặt</span>';
+            : '<span class="badge bg-secondary-subtle text-secondary border border-secondary px-2 py-0.5 fs-8 ms-1">Tiền mặt</span>';       
         const payStatusBadge = payStatus === 'Chờ xác nhận chuyển khoản'
             ? '<div class="text-warning fs-8 fw-semibold mt-1"><i class="bi bi-hourglass-split"></i> Chờ xác nhận CK</div>'
             : payStatus === 'Đã nhận tiền'
@@ -353,14 +365,14 @@ async function updateBookingStatus(userId, bookingId, newStatus) {
         ? 'Bạn có chắc chắn muốn XÁC NHẬN duyệt đơn đặt phòng nghỉ này không?' 
         : 'Bạn có chắc chắn muốn TỪ CHỐI đơn đặt phòng nghỉ này không?';
     const confirmAction = confirm(message);
-    if (!confirmAction) return;
+    if (!confirmAction) return; 
     Utils.showSpinner();
     try {
-        const user = usersList.find(u => u.id === userId);
+        const user = usersList.find(u => u.id == userId);
         if (!user) {
             throw new Error('Không tìm thấy tài khoản sở hữu đơn đặt phòng!');
         }
-        const booking = user.bookings.find(b => b.bookingId === bookingId);
+        const booking = user.bookings.find(b => b.bookingId == bookingId);
         if (!booking) {
             throw new Error('Không tìm thấy bản ghi đơn phòng yêu cầu!');
         }
@@ -386,7 +398,7 @@ function renderUsersTable() {
         const roleBadge = user.role === 'admin' 
             ? '<span class="badge bg-primary"><i class="bi bi-shield-fill text-white me-1"></i>Admin</span>'
             : '<span class="badge bg-info"><i class="bi bi-mortarboard-fill text-white me-1"></i>Student</span>';
-        const isSelf = loggedInUser && loggedInUser.id === user.id;
+        const isSelf = loggedInUser && loggedInUser.id == user.id;
         let actionButtons = '';
         if (isSelf) {
             actionButtons = '<span class="text-muted fs-8 fw-semibold"><i class="bi bi-person-check-fill me-1"></i>Tài khoản hiện tại</span>';
@@ -436,7 +448,7 @@ async function updateUserRole(userId, newRole) {
     if (!confirmAction) return;    
     Utils.showSpinner();
     try {
-        const user = usersList.find(u => u.id === userId);
+        const user = usersList.find(u => u.id == userId);
         if (!user) throw new Error('Không tìm thấy tài khoản!');  
         user.role = newRole; 
         await API.updateUserBookings(userId, user);
